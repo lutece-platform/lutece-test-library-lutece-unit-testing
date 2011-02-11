@@ -20,7 +20,7 @@
 
 	<organization>
 		<name>Mairie de Paris</name>
-		<url>http://lutece.paris.fr</url>
+		<url>http://lutece.paris.fr/library-lutece-unit-testing</url>
 	</organization>
 
 	<dependencies>
@@ -101,19 +101,19 @@
 		<repository>
 			<id>lutece</id>
 			<name>luteceRepository</name>
-			<url>http://dev.lutece.paris.fr/maven_repository</url>
+			<url>http://dev.lutece.paris.fr/maven_repository/library-lutece-unit-testing</url>
 		</repository>
 	</repositories>
 
 	<scm>
-		<connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/library-lutece-unit-testing/</connection>
-		<developerConnection>scm:svn:https://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/library-lutece-unit-testing/</developerConnection>
-		<url>https://dev.lutece.paris.fr/viewvc/portal/trunk/plugins/library-lutece-unit-testing/</url>
+		<connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/library-lutece-unit-testing//library-lutece-unit-testing</connection>
+		<developerConnection>scm:svn:https://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/library-lutece-unit-testing//library-lutece-unit-testing</developerConnection>
+		<url>https://dev.lutece.paris.fr/viewvc/portal/trunk/plugins/library-lutece-unit-testing//library-lutece-unit-testing</url>
 	</scm>
 
     <scm>
-        <connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/library</connection>
-        <developerConnection>scm:svn:https://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/library</developerConnection>
-        <url>http://dev.lutece.paris.fr/viewvc/portal/trunk/plugins/library</url>
+        <connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/library/library-lutece-unit-testing</connection>
+        <developerConnection>scm:svn:https://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/library/library-lutece-unit-testing</developerConnection>
+        <url>http://dev.lutece.paris.fr/viewvc/portal/trunk/plugins/library/library-lutece-unit-testing</url>
     </scm>
 </project>
