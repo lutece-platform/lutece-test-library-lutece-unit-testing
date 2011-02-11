@@ -101,7 +101,7 @@
 		<repository>
 			<id>lutece</id>
 			<name>luteceRepository</name>
-			<url>http://dev.lutece.paris.fr/maven_repository/library-lutece-unit-testing</url>
+			<url>http://dev.lutece.paris.fr/maven_repository</url>
 		</repository>
 	</repositories>
 
