@@ -105,12 +105,6 @@
 		</repository>
 	</repositories>
 
-	<scm>
-		<connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/library-lutece-unit-testing//library-lutece-unit-testing</connection>
-		<developerConnection>scm:svn:https://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/library-lutece-unit-testing//library-lutece-unit-testing</developerConnection>
-		<url>https://dev.lutece.paris.fr/viewvc/portal/trunk/plugins/library-lutece-unit-testing//library-lutece-unit-testing</url>
-	</scm>
-
     <scm>
         <connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/library/library-lutece-unit-testing</connection>
         <developerConnection>scm:svn:https://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/library/library-lutece-unit-testing</developerConnection>
