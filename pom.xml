@@ -16,6 +16,7 @@
 	<properties>
 		<serverUrl>dev.lutece.paris.fr</serverUrl>
 		<jiraBaseUrl>http://dev.lutece.paris.fr/jira</jiraBaseUrl>
+		<jiraProjectName>JUNIT</jiraProjectName>
 	</properties>
 
 	<organization>
