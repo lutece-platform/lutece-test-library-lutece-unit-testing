@@ -9,7 +9,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>fr.paris.lutece.plugins</groupId>
 	<artifactId>library-lutece-unit-testing</artifactId>
-	<version>2.0.7-SNAPSHOT</version>
+	<version>2.0.7</version>
 	<name>Library junit for Lutece</name>
 	<description>Lutece unit test library, contains LuteceTestCase and Moke objects</description>
 
@@ -108,8 +108,8 @@
 	</repositories>
 
     <scm>
-        <connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/library/library-lutece-unit-testing</connection>
-        <developerConnection>scm:svn:https://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/library/library-lutece-unit-testing</developerConnection>
-        <url>http://dev.lutece.paris.fr/viewvc/lutece/portal/trunk/plugins/library/library-lutece-unit-testing</url>
+        <connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/tags/library-lutece-unit-testing-2.0.7</connection>
+        <developerConnection>scm:svn:https://dev.lutece.paris.fr/svn/lutece/portal/tags/library-lutece-unit-testing-2.0.7</developerConnection>
+        <url>http://dev.lutece.paris.fr/viewvc/lutece/portal/tags/library-lutece-unit-testing-2.0.7</url>
     </scm>
 </project>
