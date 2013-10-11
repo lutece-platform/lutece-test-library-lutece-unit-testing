@@ -1,115 +1,76 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-	<parent>
-		<artifactId>lutece-global-pom</artifactId>
-		<groupId>fr.paris.lutece.tools</groupId>
-		<version>2.3</version>
-	</parent>
+    <parent>
+        <artifactId>lutece-library-pom</artifactId>
+        <groupId>fr.paris.lutece.tools</groupId>
+        <version>2.0.3</version>
+    </parent>
 
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>fr.paris.lutece.plugins</groupId>
-	<artifactId>library-lutece-unit-testing</artifactId>
-	<version>2.0.8-SNAPSHOT</version>
-	<name>Library junit for Lutece</name>
-	<description>Lutece unit test library, contains LuteceTestCase and Moke objects</description>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>fr.paris.lutece.plugins</groupId>
+    <artifactId>library-lutece-unit-testing</artifactId>
+    <version>2.0.8-SNAPSHOT</version>
+    <name>Library junit for Lutece</name>
+    <description>Lutece unit test library, contains LuteceTestCase and Moke objects</description>
 
-	<properties>
-		<serverUrl>dev.lutece.paris.fr</serverUrl>
-		<jiraBaseUrl>http://dev.lutece.paris.fr/jira</jiraBaseUrl>
-		<jiraProjectName>JUNIT</jiraProjectName>
-		<jiraComponentId>10232</jiraComponentId>
-	</properties>
+    <properties>
+        <serverUrl>dev.lutece.paris.fr</serverUrl>
+        <jiraBaseUrl>http://dev.lutece.paris.fr/jira</jiraBaseUrl>
+        <jiraProjectName>JUNIT</jiraProjectName>
+        <jiraComponentId>10232</jiraComponentId>
+    </properties>
 
-	<organization>
-		<name>Mairie de Paris</name>
-		<url>http://lutece.paris.fr/</url>
-	</organization>
-
-	<dependencies>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.4</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jsp-api</artifactId>
-			<version>2.0</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>fr.paris.lutece</groupId>
-			<artifactId>lutece-core</artifactId>
-			<version>RELEASE</version>
-			<type>lutece-core</type>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.8.1</version>
-			<scope>compile</scope>
-	    </dependency>
-	</dependencies>
-
-	<build>
-		<sourceDirectory>src/java</sourceDirectory>
-		<resources>
-			<resource>
-				<directory>src/java</directory>
-				<excludes>
-					<exclude>**/*.java</exclude>
-					<exclude>**/.svn/**</exclude>
-				</excludes>
-			</resource>
-		</resources>
-		<plugins>
-
-			<plugin>
-				<groupId>fr.paris.lutece.tools</groupId>
-				<artifactId>maven-lutece-plugin</artifactId>
-				<extensions>true</extensions>
-				<configuration>
-					<localConfDirectory>${localConfDirectory}</localConfDirectory>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
-				</configuration>
-			</plugin>
-
-			<!--
-				This declaration allows redifinition of webapp path. We don't use
-				the war plugin directly, but this definition has been found useful
-				in some cases (eg mevenide import)
-			-->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.0</version>
-				<configuration>
-					<warSourceDirectory>webapp</warSourceDirectory>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+    <dependencies>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.4</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>2.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>fr.paris.lutece</groupId>
+            <artifactId>lutece-core</artifactId>
+            <version>[3.0.0,6.0.0)</version>
+            <type>lutece-core</type>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.1</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
 
-	<repositories>
-		<repository>
-			<id>lutece</id>
-			<name>luteceRepository</name>
-			<url>http://dev.lutece.paris.fr/maven_repository</url>
-		</repository>
-	</repositories>
+    <repositories>
+        <repository>
+            <id>luteceSnapshot</id>
+            <name>luteceSnapshot</name>
+            <url>http://dev.lutece.paris.fr/snapshot_repository</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>lutece</id>
+            <name>luteceRepository</name>
+            <url>http://dev.lutece.paris.fr/maven_repository</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
     <scm>
         <connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/library/library-lutece-unit-testing</connection>
         <developerConnection>scm:svn:https://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/library/library-lutece-unit-testing</developerConnection>
         <url>http://dev.lutece.paris.fr/viewvc/lutece/portal/trunk/plugins/library/library-lutece-unit-testing</url>
     </scm>
+
 </project>
