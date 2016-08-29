@@ -1,9 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
-        <artifactId>lutece-library-pom</artifactId>
+        <artifactId>lutece-global-pom</artifactId>
         <groupId>fr.paris.lutece.tools</groupId>
-        <version>2.0.3</version>
+        <version>3.0.3</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -13,12 +13,24 @@
     <name>Library junit for Lutece</name>
     <description>Lutece unit test library, contains LuteceTestCase and Moke objects</description>
 
-    <properties>
-        <serverUrl>dev.lutece.paris.fr</serverUrl>
-        <jiraBaseUrl>http://dev.lutece.paris.fr/jira</jiraBaseUrl>
-        <jiraProjectName>JUNIT</jiraProjectName>
-        <jiraComponentId>10232</jiraComponentId>
-    </properties>
+    <repositories>
+        <repository>
+            <id>luteceSnapshot</id>
+            <name>luteceSnapshot</name>
+            <url>http://dev.lutece.paris.fr/snapshot_repository</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>lutece</id>
+            <name>luteceRepository</name>
+            <url>http://dev.lutece.paris.fr/maven_repository</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
     <dependencies>
         <dependency>
@@ -49,29 +61,18 @@
     </dependencies>
 
 
-    <repositories>
-        <repository>
-            <id>luteceSnapshot</id>
-            <name>luteceSnapshot</name>
-            <url>http://dev.lutece.paris.fr/snapshot_repository</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>lutece</id>
-            <name>luteceRepository</name>
-            <url>http://dev.lutece.paris.fr/maven_repository</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
+    <properties>
+        <serverUrl>dev.lutece.paris.fr</serverUrl>
+        <jiraBaseUrl>http://dev.lutece.paris.fr/jira</jiraBaseUrl>
+        <jiraProjectName>JUNIT</jiraProjectName>
+        <jiraComponentId>10232</jiraComponentId>
+    </properties>
+
 
     <scm>
-        <connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/library/library-lutece-unit-testing</connection>
-        <developerConnection>scm:svn:https://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/library/library-lutece-unit-testing</developerConnection>
-        <url>http://dev.lutece.paris.fr/viewvc/lutece/portal/trunk/plugins/library/library-lutece-unit-testing</url>
+        <connection>scm:git:https://github.com/lutece-platform/lutece-test-library-lutece-unit-testing.git</connection>
+        <developerConnection>scm:git:https://github.com/lutece-platform/lutece-test-library-lutece-unit-testing.git</developerConnection>
+        <url>https://github.com/lutece-platform/lutece-test-library-lutece-unit-testing.git</url>
     </scm>
 
 </project>
