@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2016, Mairie de Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -48,7 +48,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.Cookie;
@@ -57,65 +56,62 @@ import javax.servlet.http.HttpSession;
 
 /**
  * The Class is a moke object to simulate a HttpServletRequest
- * @author Mairie de Paris
- * @version 1.0
  */
-public class MokeHttpServletRequest
-    implements HttpServletRequest
+public class MokeHttpServletRequest implements HttpServletRequest
 {
     private static final String ATTRIBUTE_ADMIN_USER = "lutece_admin_user";
-    private Cookie[] _cookies = null;
-    private Map<String, List<String>> _mapParameters = new HashMap<>(  );
-    private Map<String, List<String>> _mapHeaders = new HashMap<>(  );
+    private Cookie [ ] _cookies = null;
+    private Map<String, List<String>> _mapParameters = new HashMap<>( );
+    private Map<String, List<String>> _mapHeaders = new HashMap<>( );
     private MokeHttpSession _session = null;
 
+    /**
+     * Register an admin user with a given right
+     * @param user The user
+     * @param strRight The right
+     */
     public void registerAdminUserWithRigth( AdminUser user, String strRight )
     {
-        Map<String, Right> mapRights = new HashMap<String, Right>(  );
-        Right right = new Right(  );
+        Map<String, Right> mapRights = new HashMap<String, Right>( );
+        Right right = new Right( );
         right.setId( strRight );
         mapRights.put( strRight, right );
         user.setRights( mapRights );
 
-        //TODO set locale user
+        // TODO set locale user
         user.setLocale( new Locale( "fr", "FR", "" ) );
         registerAdminUser( user );
     }
 
+    /**
+     * Register an admin user
+     * @param user The user
+     */
     public void registerAdminUser( AdminUser user )
     {
         getSession( true ).setAttribute( ATTRIBUTE_ADMIN_USER, user );
     }
 
     /**
-     * getAuthType
-     *
-     * @return String
+     * {@inheritDoc }
      */
     @Override
-    public String getAuthType(  )
+    public String getAuthType( )
     {
         return "";
     }
 
     /**
-     * getCookies
-     *
-     * @return Cookie[]
-    
+     * {@inheritDoc }
      */
     @Override
-    public Cookie[] getCookies(  )
+    public Cookie [ ] getCookies( )
     {
         return _cookies;
     }
 
     /**
-     * getDateHeader
-     *
-     * @param string String
-     * @return long
-    
+     * {@inheritDoc }
      */
     @Override
     public long getDateHeader( String string )
@@ -124,11 +120,7 @@ public class MokeHttpServletRequest
     }
 
     /**
-     * getHeader
-     *
-     * @param strHeaderName String
-     * @return String
-    
+     * {@inheritDoc }
      */
     @Override
     public String getHeader( String strHeaderName )
@@ -137,36 +129,25 @@ public class MokeHttpServletRequest
     }
 
     /**
-     * getHeaders
-     *
-     * @param strHeaderName String
-     * @return Enumeration
-    
+     * {@inheritDoc }
      */
     @Override
     public Enumeration getHeaders( String strHeaderName )
     {
-        return Collections.enumeration( _mapHeaders.get( strHeaderName ));
+        return Collections.enumeration( _mapHeaders.get( strHeaderName ) );
     }
 
     /**
-     * getHeaderNames
-     *
-     * @return Enumeration
-    
+     * {@inheritDoc }
      */
     @Override
-    public Enumeration getHeaderNames(  )
+    public Enumeration getHeaderNames( )
     {
-        return Collections.enumeration( _mapHeaders.keySet() );
+        return Collections.enumeration( _mapHeaders.keySet( ) );
     }
 
     /**
-     * getIntHeader
-     *
-     * @param string String
-     * @return int
-    
+     * {@inheritDoc }
      */
     @Override
     public int getIntHeader( String string )
@@ -175,83 +156,61 @@ public class MokeHttpServletRequest
     }
 
     /**
-     * getMethod
-     *
-     * @return String
-    
+     * {@inheritDoc }
      */
     @Override
-    public String getMethod(  )
+    public String getMethod( )
     {
         return "";
     }
 
     /**
-     * getPathInfo
-     *
-     * @return String
-    
+     * {@inheritDoc }
      */
     @Override
-    public String getPathInfo(  )
+    public String getPathInfo( )
     {
         return "";
     }
 
     /**
-     * getPathTranslated
-     *
-     * @return String
-    
+     * {@inheritDoc }
      */
     @Override
-    public String getPathTranslated(  )
+    public String getPathTranslated( )
     {
         return "";
     }
 
     /**
-     * getContextPath
-     *
-     * @return String
-    
+     * {@inheritDoc }
      */
     @Override
-    public String getContextPath(  )
+    public String getContextPath( )
     {
         return "";
     }
 
     /**
-     * getQueryString
-     *
-     * @return String
-    
+     * {@inheritDoc }
      */
     @Override
-    public String getQueryString(  )
+    public String getQueryString( )
     {
         return "";
     }
 
     /**
-     * getRemoteUser
-     *
-     * @return String
-    
+     * {@inheritDoc }
      */
     @Override
-    public String getRemoteUser(  )
+    public String getRemoteUser( )
     {
         return "";
     }
 
     /**
-     * isUserInRole
-     *
-     * @param string String
-     * @return boolean
-    
+     * {@inheritDoc }
      */
     @Override
     public boolean isUserInRole( String string )
@@ -260,149 +219,111 @@ public class MokeHttpServletRequest
     }
 
     /**
-     * getUserPrincipal
-     *
-     * @return Principal
-    
+     * {@inheritDoc }
      */
     @Override
-    public Principal getUserPrincipal(  )
+    public Principal getUserPrincipal( )
     {
         return null;
     }
 
     /**
-     * getRequestedSessionId
-     *
-     * @return String
-    
+     * {@inheritDoc }
      */
     @Override
-    public String getRequestedSessionId(  )
+    public String getRequestedSessionId( )
     {
         return "";
     }
 
     /**
-     * getRequestURI
-     *
-     * @return String
-    
+     * {@inheritDoc }
      */
     @Override
-    public String getRequestURI(  )
+    public String getRequestURI( )
     {
         return "";
     }
 
     /**
-     * getRequestURL
-     *
-     * @return StringBuffer
-    
+     * {@inheritDoc }
      */
     @Override
-    public StringBuffer getRequestURL(  )
+    public StringBuffer getRequestURL( )
     {
         return null;
     }
 
     /**
-     * getServletPath
-     *
-     * @return String
-    
+     * {@inheritDoc }
      */
     @Override
-    public String getServletPath(  )
+    public String getServletPath( )
     {
         return "";
     }
 
     /**
-     * getSession
-     *
-     * @param bCreate boolean
-     * @return HttpSession
-    
+     * {@inheritDoc }
      */
     @Override
     public HttpSession getSession( boolean bCreate )
     {
         if ( _session == null )
         {
-            _session = new MokeHttpSession(  );
+            _session = new MokeHttpSession( );
         }
 
         return _session;
     }
 
     /**
-     * getSession
-     *
-     * @return HttpSession
-    
+     * {@inheritDoc }
      */
     @Override
-    public HttpSession getSession(  )
+    public HttpSession getSession( )
     {
         return _session;
     }
 
     /**
-     * isRequestedSessionIdValid
-     *
-     * @return boolean
-    
+     * {@inheritDoc }
      */
     @Override
-    public boolean isRequestedSessionIdValid(  )
+    public boolean isRequestedSessionIdValid( )
     {
         return false;
     }
 
     /**
-     * isRequestedSessionIdFromCookie
-     *
-     * @return boolean
-    
+     * {@inheritDoc }
      */
     @Override
-    public boolean isRequestedSessionIdFromCookie(  )
+    public boolean isRequestedSessionIdFromCookie( )
     {
         return false;
     }
 
     /**
-     * isRequestedSessionIdFromURL
-     *
-     * @return boolean
-    
+     * {@inheritDoc }
      */
     @Override
-    public boolean isRequestedSessionIdFromURL(  )
+    public boolean isRequestedSessionIdFromURL( )
     {
         return false;
     }
 
     /**
-     * isRequestedSessionIdFromUrl
-     *
-     * @return boolean
-    
+     * {@inheritDoc }
      */
     @Override
-    public boolean isRequestedSessionIdFromUrl(  )
+    public boolean isRequestedSessionIdFromUrl( )
     {
         return false;
     }
 
     /**
-     * getAttribute
-     *
-     * @param string String
-     * @return Object
-     *
+     * {@inheritDoc }
      */
     @Override
     public Object getAttribute( String string )
@@ -411,86 +332,60 @@ public class MokeHttpServletRequest
     }
 
     /**
-     * getAttributeNames
-     *
-     * @return Enumeration
-     *
+     * {@inheritDoc }
      */
     @Override
-    public Enumeration getAttributeNames(  )
+    public Enumeration getAttributeNames( )
     {
         return null;
     }
 
     /**
-     * getCharacterEncoding
-     *
-     * @return String
-     *
+     * {@inheritDoc }
      */
     @Override
-    public String getCharacterEncoding(  )
+    public String getCharacterEncoding( )
     {
         return "";
     }
 
     /**
-     * setCharacterEncoding
-     *
-     * @param string String
-     * @throws UnsupportedEncodingException
-     *
+     * {@inheritDoc }
      */
     @Override
-    public void setCharacterEncoding( String string )
-                              throws UnsupportedEncodingException
+    public void setCharacterEncoding( String string ) throws UnsupportedEncodingException
     {
     }
 
     /**
-     * getContentLength
-     *
-     * @return int
-     *
+     * {@inheritDoc }
      */
     @Override
-    public int getContentLength(  )
+    public int getContentLength( )
     {
         return 0;
     }
 
     /**
-     * getContentType
-     *
-     * @return String
-     *
+     * {@inheritDoc }
      */
     @Override
-    public String getContentType(  )
+    public String getContentType( )
     {
         return "";
     }
 
     /**
-     * getInputStream
-     *
-     * @throws IOException
-     * @return ServletInputStream
-     *
+     * {@inheritDoc }
      */
     @Override
-    public ServletInputStream getInputStream(  )
-                                      throws IOException
+    public ServletInputStream getInputStream( ) throws IOException
     {
         return null;
     }
 
     /**
-     * getParameter
-     *
-     * @param strParameterName String
-     * @return String
-     *
+     * {@inheritDoc }
      */
     @Override
     public String getParameter( String strParameterName )
@@ -499,136 +394,99 @@ public class MokeHttpServletRequest
     }
 
     /**
-     * getParameterNames
-     *
-     * @return Enumeration
-     *
+     * {@inheritDoc }
      */
     @Override
-    public Enumeration getParameterNames(  )
+    public Enumeration getParameterNames( )
     {
-        return Collections.enumeration(  _mapParameters.keySet(  ) );
+        return Collections.enumeration( _mapParameters.keySet( ) );
     }
 
     /**
-     * getParameterValues
-     *
-     * @param strParameterName String
-     * @return String[]
-     *
+     * {@inheritDoc }
      */
     @Override
-    public String[] getParameterValues( String strParameterName )
+    public String [ ] getParameterValues( String strParameterName )
     {
-        String[] values =  (String[]) _mapParameters.get( strParameterName ).toArray() ;
+        String [ ] values = (String [ ]) _mapParameters.get( strParameterName ).toArray( );
 
         return values;
     }
 
     /**
-     * getParameterMap
-     *
-     * @return Map
-     *
+     * {@inheritDoc }
      */
     @Override
-    public Map getParameterMap(  )
+    public Map getParameterMap( )
     {
         return _mapParameters;
     }
 
     /**
-     * getProtocol
-     *
-     * @return String
-     *
+     * {@inheritDoc }
      */
     @Override
-    public String getProtocol(  )
+    public String getProtocol( )
     {
         return "";
     }
 
     /**
-     * getScheme
-     *
-     * @return String
-     *
+     * {@inheritDoc }
      */
     @Override
-    public String getScheme(  )
+    public String getScheme( )
     {
         return "";
     }
 
     /**
-     * getServerName
-     *
-     * @return String
-     *
+     * {@inheritDoc }
      */
     @Override
-    public String getServerName(  )
+    public String getServerName( )
     {
         return "";
     }
 
     /**
-     * getServerPort
-     *
-     * @return int
-     *
+     * {@inheritDoc }
      */
     @Override
-    public int getServerPort(  )
+    public int getServerPort( )
     {
         return 0;
     }
 
     /**
-     * getReader
-     *
-     * @throws IOException
-     * @return BufferedReader
-     *
+     * {@inheritDoc }
      */
     @Override
-    public BufferedReader getReader(  )
-                             throws IOException
+    public BufferedReader getReader( ) throws IOException
     {
         return null;
     }
 
     /**
-     * getRemoteAddr
-     *
-     * @return String
-     *
+     * {@inheritDoc }
      */
     @Override
-    public String getRemoteAddr(  )
+    public String getRemoteAddr( )
     {
         return "";
     }
 
     /**
-     * getRemoteHost
-     *
-     * @return String
-     *
+     * {@inheritDoc }
      */
     @Override
-    public String getRemoteHost(  )
+    public String getRemoteHost( )
     {
         return "";
     }
 
     /**
-     * setAttribute
-     *
-     * @param string String
-     * @param object Object
-     *
+     * {@inheritDoc }
      */
     @Override
     public void setAttribute( String string, Object object )
@@ -636,10 +494,7 @@ public class MokeHttpServletRequest
     }
 
     /**
-     * removeAttribute
-     *
-     * @param string String
-     *
+     * {@inheritDoc }
      */
     @Override
     public void removeAttribute( String string )
@@ -647,47 +502,34 @@ public class MokeHttpServletRequest
     }
 
     /**
-     * getLocale
-     *
-     * @return Locale
-     *
+     * {@inheritDoc }
      */
     @Override
-    public Locale getLocale(  )
+    public Locale getLocale( )
     {
-        return Locale.getDefault(  );
+        return Locale.getDefault( );
     }
 
     /**
-     * getLocales
-     *
-     * @return Enumeration
-     *
+     * {@inheritDoc }
      */
     @Override
-    public Enumeration getLocales(  )
+    public Enumeration getLocales( )
     {
         return null;
     }
 
     /**
-     * isSecure
-     *
-     * @return boolean
-     *
+     * {@inheritDoc }
      */
     @Override
-    public boolean isSecure(  )
+    public boolean isSecure( )
     {
         return false;
     }
 
     /**
-     * getRequestDispatcher
-     *
-     * @param string String
-     * @return RequestDispatcher
-     *
+     * {@inheritDoc }
      */
     @Override
     public RequestDispatcher getRequestDispatcher( String string )
@@ -696,11 +538,7 @@ public class MokeHttpServletRequest
     }
 
     /**
-     * getRealPath
-     *
-     * @param string String
-     * @return String
-     *
+     * {@inheritDoc }
      */
     @Override
     public String getRealPath( String string )
@@ -708,21 +546,60 @@ public class MokeHttpServletRequest
         return "";
     }
 
-    ////////////////////////////////////////////////////////////////////////////
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public int getRemotePort( )
+    {
+        return 80;
+    }
+
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public String getLocalName( )
+    {
+        return "";
+    }
+
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public String getLocalAddr( )
+    {
+        return "";
+    }
+
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public int getLocalPort( )
+    {
+        return 80;
+    }
+    
+    // //////////////////////////////////////////////////////////////////////////
     // Initialize moke values
 
     /**
      * Initialize moke parameters
-     * @param strParameterName The name
-     * @param strValue The value
+     * 
+     * @param strParameterName
+     *            The name
+     * @param strValue
+     *            The value
      */
     @Deprecated
     public void addMokeParameters( String strParameterName, String strValue )
     {
         List<String> list = _mapParameters.get( strParameterName );
-        if( list == null )
+        if ( list == null )
         {
-            list = new ArrayList<String>();
+            list = new ArrayList<String>( );
             _mapParameters.put( strParameterName, list );
         }
         list.add( strValue );
@@ -730,15 +607,18 @@ public class MokeHttpServletRequest
 
     /**
      * Initialize moke parameters
-     * @param strParameterName The name
-     * @param strValue The value
+     * 
+     * @param strParameterName
+     *            The name
+     * @param strValue
+     *            The value
      */
     public void addMokeParameter( String strParameterName, String strValue )
     {
         List<String> list = _mapParameters.get( strParameterName );
-        if( list == null )
+        if ( list == null )
         {
-            list = new ArrayList<String>();
+            list = new ArrayList<String>( );
             _mapParameters.put( strParameterName, list );
         }
         list.add( strValue );
@@ -746,15 +626,18 @@ public class MokeHttpServletRequest
 
     /**
      * Initialize moke parameters
-     * @param strHeaderName The name
-     * @param strValue The value
+     * 
+     * @param strHeaderName
+     *            The name
+     * @param strValue
+     *            The value
      */
     public void addMokeHeader( String strHeaderName, String strValue )
     {
         List<String> list = _mapHeaders.get( strHeaderName );
-        if( list == null )
+        if ( list == null )
         {
-            list = new ArrayList<String>();
+            list = new ArrayList<String>( );
             _mapHeaders.put( strHeaderName, list );
         }
         list.add( strValue );
@@ -762,50 +645,13 @@ public class MokeHttpServletRequest
 
     /**
      * Initialize moke cookies
-     * @param cookies Cookie
+     * 
+     * @param cookies
+     *            Cookie
      */
-    public void setMokeCookies( Cookie[] cookies )
+    public void setMokeCookies( Cookie [ ] cookies )
     {
         _cookies = cookies;
     }
 
-    /**
-     * The remote port
-     * @return the remote port 
-     */
-    @Override
-    public int getRemotePort(  )
-    {
-        return 80;
-    }
-
-    /**
-     * The locale name
-     * @return the local name
-     */
-    @Override
-    public String getLocalName(  )
-    {
-        return "";
-    }
-
-    /**
-     * The local Address
-     * @return the local Address
-     */
-    @Override
-    public String getLocalAddr(  )
-    {
-        return "";
-    }
-
-    /**
-     * The local port
-     * @return The local port
-     */
-    @Override
-    public int getLocalPort(  )
-    {
-        return 80;
-    }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2016, Mairie de Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -53,19 +53,18 @@ public class MokeHttpServletRequestTest
      * Test of registerAdminUserWithRigth method, of class MokeHttpServletRequest.
      */
     @Test
-    public void testMokeHttpRequestHeaders()
+    public void testMokeHttpRequestHeaders( )
     {
         System.out.println( "testMokeHttpRequestHeaders" );
-        MokeHttpServletRequest request = new MokeHttpServletRequest();
+        MokeHttpServletRequest request = new MokeHttpServletRequest( );
         request.addMokeHeader( HEADER_ACCEPT_LANGUAGE, LANGUAGE1 );
         request.addMokeHeader( HEADER_ACCEPT_LANGUAGE, LANGUAGE2 );
         request.addMokeHeader( HEADER_ACCEPT_ENCODING, ENCODING1 );
-        assertEquals( request.getHeader( HEADER_ACCEPT_LANGUAGE) , LANGUAGE1 );
-        List<String> listValues = Collections.list( request.getHeaders( HEADER_ACCEPT_LANGUAGE ));
-        assertTrue( listValues.size() == 2 );
-        List<String> listHeaderNames = Collections.list( request.getHeaderNames());
-        assertTrue( listHeaderNames.size() == 2 );
+        assertEquals( request.getHeader( HEADER_ACCEPT_LANGUAGE ), LANGUAGE1 );
+        List<String> listValues = Collections.list( request.getHeaders( HEADER_ACCEPT_LANGUAGE ) );
+        assertTrue( listValues.size( ) == 2 );
+        List<String> listHeaderNames = Collections.list( request.getHeaderNames( ) );
+        assertTrue( listHeaderNames.size( ) == 2 );
     }
 
-    
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2016, Mairie de Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -45,25 +45,27 @@ import java.io.Writer;
  */
 public class Utils
 {
-    private static Utils _singleton = new Utils(  );
+    private static Utils _singleton = new Utils( );
 
     /**
      * Gets the content of a file as a string
-     * @param strFilename The filename (ie: myfile.text for file stored in src/test/resources)
+     * 
+     * @param strFilename
+     *            The filename (ie: myfile.text for file stored in src/test/resources)
      * @return The file's content
-     * @throws IOException If an IO error occurs
+     * @throws IOException
+     *             If an IO error occurs
      */
-    public static String getFileContent( String strFilename )
-                                 throws IOException
+    public static String getFileContent( String strFilename ) throws IOException
     {
-        InputStream is = _singleton.getClass(  ).getResourceAsStream( "/" + strFilename );
+        InputStream is = _singleton.getClass( ).getResourceAsStream( "/" + strFilename );
         InputStreamReader isr = new InputStreamReader( is );
         BufferedReader in = new BufferedReader( isr );
-        Writer writer = new StringWriter(  );
+        Writer writer = new StringWriter( );
 
         if ( in != null )
         {
-            char[] buffer = new char[1024];
+            char [ ] buffer = new char [ 1024];
 
             try
             {
@@ -73,13 +75,15 @@ public class Utils
                 {
                     writer.write( buffer, 0, n );
                 }
-            } finally
+            }
+            finally
             {
-                isr.close(  );
+                isr.close( );
             }
 
-            return writer.toString(  );
-        } else
+            return writer.toString( );
+        }
+        else
         {
             return "";
         }

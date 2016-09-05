@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2016, Mairie de Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,6 +33,7 @@
  */
 package fr.paris.lutece.test;
 
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -45,92 +46,156 @@ import javax.servlet.http.HttpSessionContext;
  * Moke object to simulate HttpSession
  *
  */
-public class MokeHttpSession
-    implements HttpSession
+public class MokeHttpSession implements HttpSession
 {
-    Map _mapAttributes = new HashMap(  );
+    Map<String, Object> _mapAttributes = new HashMap<String, Object>( );
 
-    /** Creates a new instance of MokeHttpSession */
-    public MokeHttpSession(  )
-    {
-    }
-
-    public long getCreationTime(  )
-    {
-        return 0;
-    }
-
-    public String getId(  )
-    {
-        return null;
-    }
-
-    public long getLastAccessedTime(  )
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public long getCreationTime( )
     {
         return 0;
     }
 
-    public ServletContext getServletContext(  )
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public String getId( )
     {
         return null;
     }
 
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public long getLastAccessedTime( )
+    {
+        return 0;
+    }
+
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public ServletContext getServletContext( )
+    {
+        return null;
+    }
+
+    /**
+     * {@inheritDoc }
+     */
+    @Override
     public void setMaxInactiveInterval( int interval )
     {
     }
 
-    public int getMaxInactiveInterval(  )
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public int getMaxInactiveInterval( )
     {
         return 0;
     }
 
-    public HttpSessionContext getSessionContext(  )
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public HttpSessionContext getSessionContext( )
     {
         return null;
     }
 
+    /**
+     * {@inheritDoc }
+     */
+    @Override
     public Object getAttribute( String strName )
     {
         return _mapAttributes.get( strName );
     }
 
-    public Object getValue( String name )
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public Object getValue( String strName )
     {
-        return null;
+        return _mapAttributes.get( strName );
     }
 
-    public Enumeration getAttributeNames(  )
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public Enumeration getAttributeNames( )
     {
-        return null;
+        return Collections.enumeration( _mapAttributes.keySet() );
     }
 
-    public String[] getValueNames(  )
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public String [ ] getValueNames( )
     {
-        return null;
+        return (String[]) _mapAttributes.keySet().toArray();
     }
 
+    /**
+     * {@inheritDoc }
+     */
+    @Override
     public void setAttribute( String strName, Object value )
     {
         _mapAttributes.put( strName, value );
     }
 
+    /**
+     * {@inheritDoc }
+     */
+    @Override
     public void putValue( String name, Object value )
     {
     }
 
-    public void removeAttribute( String name )
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public void removeAttribute( String strName )
+    {
+        _mapAttributes.remove( strName );
+    }
+
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public void removeValue( String strName )
+    {
+        _mapAttributes.remove( strName );
+    }
+
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public void invalidate( )
     {
     }
 
-    public void removeValue( String name )
-    {
-    }
-
-    public void invalidate(  )
-    {
-    }
-
-    public boolean isNew(  )
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public boolean isNew( )
     {
         return true;
     }

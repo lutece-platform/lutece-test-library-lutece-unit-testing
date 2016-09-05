@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2016, Mairie de Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -39,46 +39,65 @@ import fr.paris.lutece.portal.service.util.AppPathService;
 import junit.framework.*;
 
 /**
- * This class is the base class for Lutece test case.
- * It provides all services initialization.
+ * This class is the base class for Lutece test case. It provides all services initialization.
  */
-public class LuteceTestCase
-    extends TestCase
+public class LuteceTestCase extends TestCase
 {
+
+    /**
+     * Init flag
+     */
     protected static boolean _bInit = false;
     private String _strResourcesDir;
 
-    public LuteceTestCase(  )
+    /**
+     * Constructor
+     */
+    public LuteceTestCase( )
     {
-        super(  );
-        _strResourcesDir = getClass(  ).getResource( "/" ).toString(  ).replaceFirst( "file:", "" )
-                               .replaceFirst( "target/.*", "target/lutece/" );
+        super( );
+        _strResourcesDir = getClass( ).getResource( "/" ).toString( ).replaceFirst( "file:", "" ).replaceFirst( "target/.*", "target/lutece/" );
     }
 
+    /**
+     * The test name
+     * @param strTestName The test name
+     */
     public LuteceTestCase( String strTestName )
     {
         super( strTestName );
-        _strResourcesDir = getClass(  ).getResource( "/" ).toString(  ).replaceFirst( "file:", "" )
-                               .replaceFirst( "target/.*", "target/lutece/" );
+        _strResourcesDir = getClass( ).getResource( "/" ).toString( ).replaceFirst( "file:", "" ).replaceFirst( "target/.*", "target/lutece/" );
     }
 
-    public String getResourcesDir(  )
+    /**
+     * Returns the resources directory
+     * @return The resources directory
+     */
+    public String getResourcesDir( )
     {
         return _strResourcesDir;
     }
 
+    /**
+     * Set the resources directory
+     * @param strResourcesDir The resources directory
+     */
     public void setResourcesDir( String strResourcesDir )
     {
         _strResourcesDir = strResourcesDir;
     }
 
-    protected void setUp(  )
-                  throws Exception
+    /**
+     * Initialize LUTECE services
+     * @throws Exception if an error occurs
+     */
+    @Override
+    protected void setUp( ) throws Exception
     {
-        super.setUp(  );
+        super.setUp( );
 
         // Initializes Lutece services
-        if ( ! _bInit )
+        if ( !_bInit )
         {
             System.out.println( "-------------resourcesDir------------" + _strResourcesDir );
             AppPathService.init( _strResourcesDir );
@@ -88,12 +107,16 @@ public class LuteceTestCase
             System.out.println( "Lutece services initialized" );
         }
 
-        System.out.println( this.getName(  ) );
+        System.out.println( this.getName( ) );
     }
 
-    protected void tearDown(  )
-                     throws Exception
+    /**
+     * Shutdown
+     * @throws Exception if an error occurs
+     */
+    @Override
+    protected void tearDown( ) throws Exception
     {
-        super.tearDown(  );
+        super.tearDown( );
     }
 }
