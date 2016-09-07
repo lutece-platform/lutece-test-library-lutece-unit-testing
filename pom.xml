@@ -12,7 +12,6 @@
     <version>2.0.9-SNAPSHOT</version>
     <name>Library unit testing for Lutece</name>
     <description>Lutece unit test library, contains LuteceTestCase and Moke objects</description>
-    <packaging>lutece-plugin</packaging>
 
     <repositories>
         <repository>
