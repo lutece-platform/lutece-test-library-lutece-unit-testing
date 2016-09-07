@@ -43,7 +43,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionContext;
 
 /**
- * Moke object to simulate HttpSession
+ * Mock object to simulate HttpSession
  *
  */
 public class MokeHttpSession implements HttpSession

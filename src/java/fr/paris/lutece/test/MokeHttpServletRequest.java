@@ -55,7 +55,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
- * The Class is a moke object to simulate a HttpServletRequest
+ * The Class is a mock object to simulate a HttpServletRequest
  */
 public class MokeHttpServletRequest implements HttpServletRequest
 {

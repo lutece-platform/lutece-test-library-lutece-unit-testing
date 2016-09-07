@@ -1,12 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
-	<properties>
-		<title>Plugin</title>
-	</properties>
-	<body>
-		<section name="Plugin">
-			<subsection name="Introduction">
-			</subsection>
-		</section>
-	</body>
+    <properties>
+        <title>Library Lutece Unit testing</title>
+    </properties>
+    <body>
+        <section name="Library Lutece Unit testing">
+            <subsection name="Introduction">
+                <p>
+                    Cette bibliothéque propose des classes facilitant la mise en oeuvre de tests unitaire.
+                </p>
+                <p>
+                    <b>LuteceTestCase</b>
+                </p>
+                <p>
+                    Une classe <b>LuteceTestCase</b> permet de créer des classes de test avec tous les services Lutece 
+                    initialisés (AppPropertiesService, AppPathService, accès base de données,...).
+                </p>
+        <div class="code">
+                        <pre>
+
+public MyTestCase extends LuteceTestCase
+{
+	...
+}
+                        </pre>
+        </div>
+                <p>
+                    <b>Mock Objects</b>
+                </p>
+                <p>
+                    Des classes 'Moke*' permettent de créer des objets de substitution, <b>"Mock Object"</b>, 
+                    tels que des requêtes ou des sessions HTTP et d'en définir les paramètres afin de simuler des cas de test.
+                </p>
+                <p>
+                    Dans l'exemple ci-dessous, un objet requête HTTP contenant un utilisateur identifé a été créée afin
+                    de tester une AdminFeature soumise à authentification.
+                </p>
+                <p>
+        <div class="code">
+                        <pre>
+
+MokeHttpServletRequest request = new MokeHttpServletRequest(  );
+request.registerAdminUserWithRigth( new AdminUser(  ), RIGHT_MY_FEATURE );
+request.addMokeParameters( PARAM_NANE, PARAM_VALUE );
+
+MyPluginJspBean instance = new MyPluginJspBean(  );
+
+instance.init( request, RIGHT_MY_FEATURE );
+instance.getMyFeature( request );
+                        </pre>
+        </div>
+                </p>
+            </subsection>
+        </section>
+    </body>
 </document>
