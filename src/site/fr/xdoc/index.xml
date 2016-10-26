@@ -29,7 +29,7 @@ public MyTestCase extends LuteceTestCase
                     <b>Mock Objects</b>
                 </p>
                 <p>
-                    Des classes 'Moke*' permettent de créer des objets de substitution, <b>"Mock Object"</b>, 
+                    Des classes 'Mock*' issues de spring-test permettent de créer des objets de substitution, <b>"Mock Object"</b>, 
                     tels que des requêtes ou des sessions HTTP et d'en définir les paramètres afin de simuler des cas de test.
                 </p>
                 <p>
@@ -40,11 +40,11 @@ public MyTestCase extends LuteceTestCase
         <div class="code">
                         <pre>
 
-MokeHttpServletRequest request = new MokeHttpServletRequest(  );
-request.registerAdminUserWithRigth( new AdminUser(  ), RIGHT_MY_FEATURE );
-request.addMokeParameters( PARAM_NANE, PARAM_VALUE );
+MockHttpServletRequest request = new MockHttpServletRequest( );
+Utils.registerAdminUserWithRigth( request, new AdminUser( ), RIGHT_MY_FEATURE);
+request.addParameter( PARAM_NANE, param_value );
 
-MyPluginJspBean instance = new MyPluginJspBean(  );
+MyPluginJspBean instance = new MyPluginJspBean( );
 
 instance.init( request, RIGHT_MY_FEATURE );
 instance.getMyFeature( request );

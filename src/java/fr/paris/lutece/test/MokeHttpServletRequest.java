@@ -33,553 +33,41 @@
  */
 package fr.paris.lutece.test;
 
-import fr.paris.lutece.portal.business.right.Right;
-import fr.paris.lutece.portal.business.user.AdminUser;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletInputStream;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+
+import org.springframework.mock.web.MockHttpServletRequest;
+
+import fr.paris.lutece.portal.business.user.AdminUser;
 
 /**
  * The Class is a mock object to simulate a HttpServletRequest
+ * @deprecated Use {@link MockHttpServletRequest} instead
  */
-public class MokeHttpServletRequest implements HttpServletRequest
+@Deprecated
+public class MokeHttpServletRequest extends MockHttpServletRequest
 {
-    private static final String ATTRIBUTE_ADMIN_USER = "lutece_admin_user";
-    private Cookie [ ] _cookies = null;
-    private Map<String, List<String>> _mapParameters = new HashMap<>( );
-    private Map<String, List<String>> _mapHeaders = new HashMap<>( );
-    private MokeHttpSession _session = null;
 
     /**
      * Register an admin user with a given right
      * @param user The user
      * @param strRight The right
+     * @deprecated use {@link Utils#registerAdminUserWithRigth(javax.servlet.http.HttpServletRequest, AdminUser, String)} instead
      */
+    @Deprecated
     public void registerAdminUserWithRigth( AdminUser user, String strRight )
     {
-        Map<String, Right> mapRights = new HashMap<String, Right>( );
-        Right right = new Right( );
-        right.setId( strRight );
-        mapRights.put( strRight, right );
-        user.setRights( mapRights );
-
-        // TODO set locale user
-        user.setLocale( new Locale( "fr", "FR", "" ) );
-        registerAdminUser( user );
+        Utils.registerAdminUserWithRigth( this, user, strRight );
     }
 
     /**
      * Register an admin user
      * @param user The user
+     * @deprecated use {@link Utils#registerAdminUser(javax.servlet.http.HttpServletRequest, AdminUser)} instead
      */
+    @Deprecated
     public void registerAdminUser( AdminUser user )
     {
-        getSession( true ).setAttribute( ATTRIBUTE_ADMIN_USER, user );
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public String getAuthType( )
-    {
-        return "";
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public Cookie [ ] getCookies( )
-    {
-        return _cookies;
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public long getDateHeader( String string )
-    {
-        return 0L;
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public String getHeader( String strHeaderName )
-    {
-        return (String) _mapHeaders.get( strHeaderName ).get( 0 );
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public Enumeration getHeaders( String strHeaderName )
-    {
-        return Collections.enumeration( _mapHeaders.get( strHeaderName ) );
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public Enumeration getHeaderNames( )
-    {
-        return Collections.enumeration( _mapHeaders.keySet( ) );
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public int getIntHeader( String string )
-    {
-        return 0;
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public String getMethod( )
-    {
-        return "";
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public String getPathInfo( )
-    {
-        return "";
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public String getPathTranslated( )
-    {
-        return "";
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public String getContextPath( )
-    {
-        return "";
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public String getQueryString( )
-    {
-        return "";
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public String getRemoteUser( )
-    {
-        return "";
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public boolean isUserInRole( String string )
-    {
-        return false;
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public Principal getUserPrincipal( )
-    {
-        return null;
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public String getRequestedSessionId( )
-    {
-        return "";
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public String getRequestURI( )
-    {
-        return "";
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public StringBuffer getRequestURL( )
-    {
-        return null;
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public String getServletPath( )
-    {
-        return "";
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public HttpSession getSession( boolean bCreate )
-    {
-        if ( _session == null )
-        {
-            _session = new MokeHttpSession( );
-        }
-
-        return _session;
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public HttpSession getSession( )
-    {
-        return _session;
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public boolean isRequestedSessionIdValid( )
-    {
-        return false;
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public boolean isRequestedSessionIdFromCookie( )
-    {
-        return false;
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public boolean isRequestedSessionIdFromURL( )
-    {
-        return false;
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public boolean isRequestedSessionIdFromUrl( )
-    {
-        return false;
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public Object getAttribute( String string )
-    {
-        return "";
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public Enumeration getAttributeNames( )
-    {
-        return null;
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public String getCharacterEncoding( )
-    {
-        return "";
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public void setCharacterEncoding( String string ) throws UnsupportedEncodingException
-    {
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public int getContentLength( )
-    {
-        return 0;
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public String getContentType( )
-    {
-        return "";
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public ServletInputStream getInputStream( ) throws IOException
-    {
-        return null;
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public String getParameter( String strParameterName )
-    {
-        return (String) _mapParameters.get( strParameterName ).get( 0 );
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public Enumeration getParameterNames( )
-    {
-        return Collections.enumeration( _mapParameters.keySet( ) );
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public String [ ] getParameterValues( String strParameterName )
-    {
-        String [ ] values = (String [ ]) _mapParameters.get( strParameterName ).toArray( );
-
-        return values;
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public Map getParameterMap( )
-    {
-        return _mapParameters;
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public String getProtocol( )
-    {
-        return "";
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public String getScheme( )
-    {
-        return "";
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public String getServerName( )
-    {
-        return "";
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public int getServerPort( )
-    {
-        return 0;
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public BufferedReader getReader( ) throws IOException
-    {
-        return null;
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public String getRemoteAddr( )
-    {
-        return "";
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public String getRemoteHost( )
-    {
-        return "";
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public void setAttribute( String string, Object object )
-    {
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public void removeAttribute( String string )
-    {
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public Locale getLocale( )
-    {
-        return Locale.getDefault( );
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public Enumeration getLocales( )
-    {
-        return null;
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public boolean isSecure( )
-    {
-        return false;
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public RequestDispatcher getRequestDispatcher( String string )
-    {
-        return null;
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public String getRealPath( String string )
-    {
-        return "";
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public int getRemotePort( )
-    {
-        return 80;
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public String getLocalName( )
-    {
-        return "";
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public String getLocalAddr( )
-    {
-        return "";
-    }
-
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public int getLocalPort( )
-    {
-        return 80;
+        Utils.registerAdminUser( this, user );
     }
     
     // //////////////////////////////////////////////////////////////////////////
@@ -596,13 +84,7 @@ public class MokeHttpServletRequest implements HttpServletRequest
     @Deprecated
     public void addMokeParameters( String strParameterName, String strValue )
     {
-        List<String> list = _mapParameters.get( strParameterName );
-        if ( list == null )
-        {
-            list = new ArrayList<String>( );
-            _mapParameters.put( strParameterName, list );
-        }
-        list.add( strValue );
+        addParameter( strParameterName, strValue );
     }
 
     /**
@@ -613,15 +95,10 @@ public class MokeHttpServletRequest implements HttpServletRequest
      * @param strValue
      *            The value
      */
+    @Deprecated
     public void addMokeParameter( String strParameterName, String strValue )
     {
-        List<String> list = _mapParameters.get( strParameterName );
-        if ( list == null )
-        {
-            list = new ArrayList<String>( );
-            _mapParameters.put( strParameterName, list );
-        }
-        list.add( strValue );
+        addParameter( strParameterName, strValue );
     }
 
     /**
@@ -632,15 +109,10 @@ public class MokeHttpServletRequest implements HttpServletRequest
      * @param strValue
      *            The value
      */
+    @Deprecated
     public void addMokeHeader( String strHeaderName, String strValue )
     {
-        List<String> list = _mapHeaders.get( strHeaderName );
-        if ( list == null )
-        {
-            list = new ArrayList<String>( );
-            _mapHeaders.put( strHeaderName, list );
-        }
-        list.add( strValue );
+        addHeader( strHeaderName, strValue );
     }
 
     /**
@@ -649,9 +121,10 @@ public class MokeHttpServletRequest implements HttpServletRequest
      * @param cookies
      *            Cookie
      */
+    @Deprecated
     public void setMokeCookies( Cookie [ ] cookies )
     {
-        _cookies = cookies;
+        setCookies( cookies );
     }
 
 }
