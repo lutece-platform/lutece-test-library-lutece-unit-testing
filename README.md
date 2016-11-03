@@ -3,7 +3,7 @@
 
 ##Introduction
 
-This library provides classes to facilitate the implementation of unitary tests.
+This library provides classes to facilitate the implementation of unit tests.
 
  **LuteceTestCase** 
 
@@ -21,22 +21,22 @@ public MyTestCase extends LuteceTestCase
 
  **Mock Objects** 
 
-Classes 'Moke *' can create false objects **"Mock Object"** such as requests or HTTP sessions and define parameters to simulate test cases.
+Mock objects from spring-test can be used. Some utilities are provided.
 
-In the example below, a false application containing false identifed user was created to testing a AdminFeature subjected to authentication.
+In the example below, a false application containing false identified user was created to test an AdminFeature subjected to authentication.
 
 
 ```
 
 
-MokeHttpServletRequest MokeHttpServletRequest request = new ();
-request.registerAdminUserWithRigth (new AdminUser () RIGHT_MY_FEATURE);
-request.addMokeParameters (PARAM_NANE, param_value);
+MockHttpServletRequest request = new MockHttpServletRequest( );
+Utils.registerAdminUserWithRigth( request, new AdminUser( ), RIGHT_MY_FEATURE);
+request.addParameter( PARAM_NANE, param_value );
 
-MyPluginJspBean instance = new MyPluginJspBean ();
+MyPluginJspBean instance = new MyPluginJspBean( );
 
-instance.init (request, RIGHT_MY_FEATURE);
-instance.getMyFeature (request);
+instance.init( request, RIGHT_MY_FEATURE );
+instance.getMyFeature( request );
                         
 ```
 
