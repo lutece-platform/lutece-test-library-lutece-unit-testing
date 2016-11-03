@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>fr.paris.lutece.plugins</groupId>
     <artifactId>library-lutece-unit-testing</artifactId>
-    <version>2.0.10-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
     <name>Library unit testing for Lutece</name>
     <description>Lutece unit test library, contains LuteceTestCase and Moke objects</description>
 
