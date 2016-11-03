@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>fr.paris.lutece.plugins</groupId>
     <artifactId>library-lutece-unit-testing</artifactId>
-    <version>3.0.0-SNAPSHOT</version>
+    <version>3.0.0</version>
     <name>Library unit testing for Lutece</name>
     <description>Lutece unit test library, contains LuteceTestCase and Moke objects</description>
 
@@ -77,7 +77,7 @@
         <connection>scm:git:https://github.com/lutece-platform/lutece-test-library-lutece-unit-testing.git</connection>
         <developerConnection>scm:git:https://github.com/lutece-platform/lutece-test-library-lutece-unit-testing.git</developerConnection>
         <url>https://github.com/lutece-platform/lutece-test-library-lutece-unit-testing.git</url>
-      <tag>HEAD</tag>
+      <tag>lutece-test-library-lutece-unit-testing-3.0.0</tag>
   </scm>
 
 </project>
