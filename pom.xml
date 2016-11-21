@@ -51,6 +51,12 @@
             <artifactId>spring-test</artifactId>
             <version>${springVersion}</version>
         </dependency>
+        <!-- Needed by validation-api 1.1.0 (hibernate-validator 5.3.2) -->
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.el</artifactId>
+            <version>3.0.0</version>
+        </dependency>
     </dependencies>
 
     <properties>
