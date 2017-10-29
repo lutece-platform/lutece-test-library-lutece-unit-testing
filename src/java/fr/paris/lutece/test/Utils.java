@@ -33,20 +33,29 @@
  */
 package fr.paris.lutece.test;
 
+import static org.junit.Assert.fail;
+
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.xml.sax.SAXException;
+
 import fr.paris.lutece.portal.business.right.Right;
 import fr.paris.lutece.portal.business.user.AdminUser;
+import nu.validator.client.EmbeddedValidator;
 
 /**
  * Utils for tests
@@ -125,6 +134,109 @@ public class Utils
         else
         {
             return "";
+        }
+    }
+
+    /**
+     * Validate an html fragment, failing on warning
+     * 
+     * @param html
+     *            the fragment to validate
+     * @throws IOException
+     *             in case of error
+     * @throws SAXException
+     *             in case of error
+     * @throws AssertionError
+     *             if the fragment is invalid or produces warnings
+     */
+    public static void validateHtmlFragment( String html ) throws IOException, SAXException
+    {
+        validateHtml( "<!DOCTYPE html><title>junit</title>" + html, true );
+    }
+
+    /**
+     * Validate an html fragment
+     * 
+     * @param html
+     *            the fragment to validate
+     * @param failOnWarning
+     *            whether to fail on warning
+     * @throws IOException
+     *             in case of error
+     * @throws SAXException
+     *             in case of error
+     * @throws AssertionError
+     *             if the fragment is invalid or produces warnings
+     */
+    public static void validateHtmlFragment( String html, boolean failOnWarning ) throws IOException, SAXException
+    {
+        validateHtml( "<!DOCTYPE html><title>junit</title>" + html, failOnWarning );
+    }
+
+    /**
+     * Validate an html document
+     * 
+     * @param html
+     *            the document to validate
+     * @throws IOException
+     *             in case of error
+     * @throws SAXException
+     *             in case of error
+     * @throws AssertionError
+     *             if the document is invalid or produces warnings
+     */
+    public static void validateHtml( String html ) throws IOException, SAXException
+    {
+        validateHtml( html, true );
+    }
+
+    /**
+     * Validate an html document
+     * 
+     * @param html
+     *            the document to validate
+     * @param failOnWarning
+     *            whether to fail on warning
+     * @throws IOException
+     *             in case of error
+     * @throws SAXException
+     *             in case of error
+     * @throws AssertionError
+     *             if the document is invalid or produces warnings
+     */
+    public static void validateHtml( String html, boolean failOnWarning ) throws IOException, SAXException
+    {
+        EmbeddedValidator validator = new EmbeddedValidator( );
+        String res = validator.validate( new ByteArrayInputStream( html.getBytes( StandardCharsets.UTF_8 ) ) );
+        ObjectMapper mapper = new ObjectMapper( );
+        JsonNode node = mapper.readTree( res );
+        JsonNode messages = node.get( "messages" );
+        if ( messages != null )
+        {
+            messages.forEach( message -> {
+                JsonNode type = message.get( "type" );
+                if ( type != null )
+                {
+                    switch ( type.asText( ) )
+                    {
+                    case "error":
+                        fail( "Invalid HTML : " + message.toString( ) );
+                        break;
+                    case "info":
+                        JsonNode subtype = message.get( "subType" );
+                        if ( subtype != null && subtype.asText( ).equals( "warning" ) )
+                        {
+                            if ( failOnWarning )
+                            {
+                                fail( "HTML with warning : " + message.toString( ) );
+                            }
+                        }
+                    default:
+                        break;
+                    }
+
+                }
+            } );
         }
     }
 }
