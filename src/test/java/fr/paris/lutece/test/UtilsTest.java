@@ -33,6 +33,7 @@
  */
 package fr.paris.lutece.test;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -140,5 +141,35 @@ public class UtilsTest
         {
             fail( "Should not have failed, but got " + e.getMessage( ) );
         }
+    }
+
+    @Test
+    public void testGetRandomName( )
+    {
+        String strName = Utils.getRandomName( );
+        assertTrue( strName.startsWith( "junit" ) );
+        assertTrue( strName.length( ) <= 30 );
+        assertFalse( strName.equals( Utils.getRandomName( ) ) );
+    }
+
+    @Test
+    public void testGetRandomNamePrefix( )
+    {
+        final String strPrefix = "test";
+        String strName = Utils.getRandomName( strPrefix );
+        assertTrue( strName.startsWith( strPrefix ) );
+        assertTrue( strName.length( ) <= 30 );
+        assertFalse( strName.equals( Utils.getRandomName( strPrefix ) ) );
+    }
+
+    @Test
+    public void testGetRandomNamePrefixLength( )
+    {
+        final String strPrefix = "test";
+        final int nRandomBits = 10;
+        String strName = Utils.getRandomName( strPrefix, nRandomBits );
+        assertTrue( strName.startsWith( strPrefix ) );
+        assertTrue( strName.length( ) <= 2 + strPrefix.length( ) );
+        assertFalse( strName.equals( Utils.getRandomName( strPrefix, nRandomBits ) ) );
     }
 }

@@ -42,10 +42,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
+import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -65,6 +68,8 @@ public class Utils
     private static Utils _singleton = new Utils( );
 
     private static final String ATTRIBUTE_ADMIN_USER = "lutece_admin_user";
+
+    private static final Random _rand = new SecureRandom( );
 
     /**
      * Register an admin user with a given right
@@ -238,5 +243,44 @@ public class Utils
                 }
             } );
         }
+    }
+
+    /**
+     * Get a random name for use in tests
+     * 
+     * @return a random name with prefix <q>junit</q> and 128 bits of randomness
+     */
+    public static String getRandomName( )
+    {
+        return getRandomName( "junit", 128 );
+    }
+
+    /**
+     * Get a random name for use in tests
+     * 
+     * @param strPrefix
+     *            the prefix to use
+     * @return a random name with the specified prefix and 128 bits of
+     *         randomness
+     */
+    public static String getRandomName( String strPrefix )
+    {
+        return getRandomName( strPrefix, 128 );
+    }
+
+    /**
+     * Get a random name for use in tests
+     * 
+     * @param strPrefix
+     *            the prefix to use
+     * @param nRandomBits
+     *            the numnber of bits of randomness to use
+     * @return a random name with the specified prefix and the specified number
+     *         of bits of randomness
+     */
+    public static String getRandomName( String strPrefix, int nRandomBits )
+    {
+        BigInteger bigInt = new BigInteger( nRandomBits, _rand );
+        return strPrefix + bigInt.toString( 36 );
     }
 }
