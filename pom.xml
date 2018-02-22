@@ -61,7 +61,7 @@
             <groupId>nu.validator</groupId>
             <artifactId>validator</artifactId>
             <version>17.11.1</version>
-            <scope>test</scope>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
