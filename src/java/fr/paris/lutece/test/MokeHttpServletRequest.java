@@ -125,7 +125,8 @@ public class MokeHttpServletRequest implements HttpServletRequest
     @Override
     public String getHeader( String strHeaderName )
     {
-        return (String) _mapHeaders.get( strHeaderName ).get( 0 );
+        List<String> listValues = _mapHeaders.get( strHeaderName );
+        return listValues == null ? null : listValues.get( 0 );
     }
 
     /**
@@ -134,7 +135,8 @@ public class MokeHttpServletRequest implements HttpServletRequest
     @Override
     public Enumeration getHeaders( String strHeaderName )
     {
-        return Collections.enumeration( _mapHeaders.get( strHeaderName ) );
+        List<String> listValues = _mapHeaders.get( strHeaderName );
+        return listValues == null ? null : Collections.enumeration( listValues );
     }
 
     /**
@@ -390,7 +392,8 @@ public class MokeHttpServletRequest implements HttpServletRequest
     @Override
     public String getParameter( String strParameterName )
     {
-        return (String) _mapParameters.get( strParameterName ).get( 0 );
+        List<String> listValues = _mapParameters.get( strParameterName );
+        return listValues == null ? null : listValues.get( 0 );
     }
 
     /**
@@ -409,8 +412,16 @@ public class MokeHttpServletRequest implements HttpServletRequest
     public String [ ] getParameterValues( String strParameterName )
     {
         List<String> listValues = _mapParameters.get( strParameterName );
-        String [ ] values = new String [ listValues.size( )];
-        listValues.toArray( values );
+        String [ ] values;
+        if ( listValues != null )
+        {
+            values = new String [ listValues.size( )];
+            listValues.toArray( values );
+        }
+        else
+        {
+            values = null;
+        }
 
         return values;
     }

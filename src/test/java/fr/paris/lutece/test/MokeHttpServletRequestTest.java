@@ -56,6 +56,7 @@ public class MokeHttpServletRequestTest
     private static final String LANGUAGE1 = "en";
     private static final String LANGUAGE2 = "fr";
     private static final String ENCODING1 = "gzip,deflate";
+    private static final String MISSING = "missingXXXXX";
 
     @Test
     public void testMokeHttpRequestParams( )
@@ -90,4 +91,31 @@ public class MokeHttpServletRequestTest
         assertTrue( listHeaderNames.size( ) == 2 );
     }
 
+    @Test
+    public void testMissingParameter( )
+    {
+        MokeHttpServletRequest request = new MokeHttpServletRequest( );
+        assertNull( request.getParameter( MISSING ) );
+    }
+
+    @Test
+    public void testMissingParameters( )
+    {
+        MokeHttpServletRequest request = new MokeHttpServletRequest( );
+        assertNull( request.getParameterValues( MISSING ) );
+    }
+
+    @Test
+    public void testMissingHeader( )
+    {
+        MokeHttpServletRequest request = new MokeHttpServletRequest( );
+        assertNull( request.getHeader( MISSING ) );
+    }
+
+    @Test
+    public void testMissingHeaders( )
+    {
+        MokeHttpServletRequest request = new MokeHttpServletRequest( );
+        assertNull( request.getHeaders( MISSING ) );
+    }
 }
