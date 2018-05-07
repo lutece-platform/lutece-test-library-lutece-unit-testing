@@ -408,7 +408,9 @@ public class MokeHttpServletRequest implements HttpServletRequest
     @Override
     public String [ ] getParameterValues( String strParameterName )
     {
-        String [ ] values = (String [ ]) _mapParameters.get( strParameterName ).toArray( );
+        List<String> listValues = _mapParameters.get( strParameterName );
+        String [ ] values = new String [ listValues.size( )];
+        listValues.toArray( values );
 
         return values;
     }
