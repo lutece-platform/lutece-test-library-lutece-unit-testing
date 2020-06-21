@@ -151,7 +151,7 @@ public class Utils
      */
     public static void validateHtmlFragment( String html ) throws IOException, SAXException
     {
-        validateHtml( "<!DOCTYPE html><title>junit</title>" + html, true );
+        validateHtml( "<!DOCTYPE html><html lang=fr><title>junit</title>" + html, true );
     }
 
     /**
