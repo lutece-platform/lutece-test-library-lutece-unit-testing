@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>fr.paris.lutece.plugins</groupId>
     <artifactId>library-lutece-unit-testing</artifactId>
-    <version>4.1.1-SNAPSHOT</version>
+    <version>4.1.0-SNAPSHOT</version>
     <name>Library unit testing for Lutece</name>
     <description>Lutece unit test library, contains LuteceTestCase and Moke objects</description>
 
@@ -43,7 +43,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>4.13</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

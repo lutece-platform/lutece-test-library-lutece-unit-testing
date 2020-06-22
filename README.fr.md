@@ -7,27 +7,27 @@
 
 ## Introduction
 
-This library provides classes to facilitate the implementation of unit tests.
+Cette bibliothéque propose des classes facilitant la mise en oeuvre de tests unitaire.
 
  **LuteceTestCase** 
 
-A class **LuteceTestCase** to create test classes with all services Lutece initialized (AppPropertiesService, AppPathService, database access ...).
+Une classe **LuteceTestCase** permet de créer des classes de test avec tous les services Lutece initialisés (AppPropertiesService, AppPathService, accès base de données,...).
 
 ```
 
 
 public MyTestCase extends LuteceTestCase
 {
-...
+	...
 }
                         
 ```
 
  **Mock Objects** 
 
-Mock objects from spring-test can be used. Some utilities are provided.
+Des classes 'Mock*' issues de spring-test permettent de créer des objets de substitution, **"Mock Object"** , tels que des requêtes ou des sessions HTTP et d'en définir les paramètres afin de simuler des cas de test.
 
-In the example below, a false application containing false identified user was created to test an AdminFeature subjected to authentication.
+Dans l'exemple ci-dessous, un objet requête HTTP contenant un utilisateur identifé a été créée afin de tester une AdminFeature soumise à authentification.
 
 
 ```
