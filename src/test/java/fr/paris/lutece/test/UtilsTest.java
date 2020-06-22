@@ -54,7 +54,7 @@ public class UtilsTest
     @Test
     public void testValidateHtml( ) throws IOException, SAXException
     {
-        Utils.validateHtml( "<!DOCTYPE html><title>junit</title><div>hello world</div>" );
+        Utils.validateHtml( "<!DOCTYPE html><html lang=en><title>junit</title><div>hello world</div>" );
     }
 
     @Test
