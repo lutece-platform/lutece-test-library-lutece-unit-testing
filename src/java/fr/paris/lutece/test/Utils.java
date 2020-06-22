@@ -52,8 +52,8 @@ import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.xml.sax.SAXException;
 
 import fr.paris.lutece.portal.business.right.Right;
