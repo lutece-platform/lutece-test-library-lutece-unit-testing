@@ -66,7 +66,7 @@
         <dependency>
             <groupId>nu.validator</groupId>
             <artifactId>validator</artifactId>
-            <version>18.11.5</version>
+            <version>20.7.2</version> <!-- version compatible with java 1.8, see https://github.com/validator/validator/issues/994#issuecomment-652685692 -->
             <scope>compile</scope>
         </dependency>
     </dependencies>
