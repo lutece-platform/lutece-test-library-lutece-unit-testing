@@ -3,13 +3,13 @@
     <parent>
         <artifactId>lutece-global-pom</artifactId>
         <groupId>fr.paris.lutece.tools</groupId>
-        <version>5.1.1</version>
+        <version>8.0.0-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>fr.paris.lutece.plugins</groupId>
     <artifactId>library-lutece-unit-testing</artifactId>
-    <version>4.1.2-SNAPSHOT</version>
+    <version>5.0.0-SNAPSHOT</version>
     <name>Library unit testing for Lutece</name>
     <description>Lutece unit test library, contains LuteceTestCase and Moke objects</description>
 
@@ -36,7 +36,7 @@
         <dependency>
             <groupId>fr.paris.lutece</groupId>
             <artifactId>lutece-core</artifactId>
-            <version>[6.0.0,)</version>
+            <version>[8.0.0-SNAPSHOT,)</version>
             <type>lutece-core</type>
             <scope>provided</scope>
         </dependency>
@@ -57,12 +57,17 @@
             <artifactId>spring-test</artifactId>
             <version>${springVersion}</version>
         </dependency>
-        <!-- Needed by validation-api 1.1.0 (hibernate-validator 5.3.2) -->
+        <!-- Needed by validation-api 1.1.0 (hibernate-validator 5.3.2)
+		<dependency>
+		    <groupId>jakarta.el</groupId>
+		    <artifactId>jakarta.el-api</artifactId>
+		    <version>5.0.1</version>
+		</dependency>
         <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>javax.el</artifactId>
             <version>3.0.0</version>
-        </dependency>
+        </dependency> -->
         <dependency>
             <groupId>nu.validator</groupId>
             <artifactId>validator</artifactId>
@@ -82,7 +87,7 @@
         <jiraBaseUrl>http://dev.lutece.paris.fr/jira</jiraBaseUrl>
         <jiraProjectName>JUNIT</jiraProjectName>
         <jiraComponentId>10232</jiraComponentId>
-        <springVersion>4.3.3.RELEASE</springVersion>
+        <springVersion>6.0.8</springVersion>
     </properties>
 
     <scm>

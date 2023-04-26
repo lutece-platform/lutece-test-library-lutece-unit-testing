@@ -33,7 +33,7 @@
  */
 package fr.paris.lutece.test;
 
-import javax.servlet.http.Cookie;
+import jakarta.servlet.http.Cookie;
 
 import org.springframework.mock.web.MockHttpServletRequest;
 
