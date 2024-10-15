@@ -307,6 +307,11 @@ public class MockHttpServletRequest implements HttpServletRequest
         return remoteAddr;
     }
 
+    public void setRemoteAddr( String remoteAddr )
+    {
+        this.remoteAddr = remoteAddr;
+    }
+
     @Override
     public String getRemoteHost()
     {

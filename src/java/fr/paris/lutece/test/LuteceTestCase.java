@@ -69,6 +69,7 @@ import org.junit.platform.commons.support.AnnotationSupport;
 import fr.paris.lutece.TestPackageMarker;
 import jakarta.annotation.Resource;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.enterprise.inject.literal.InjectLiteral;
 
@@ -106,7 +107,7 @@ public abstract class LuteceTestCase extends org.junit.jupiter.api.Assertions
 
     @WeldSetup
     public WeldInitiator init = customizeWeldInitiatorBuilder( WeldInitiator.from( weld ) // the one above
-            .activate( ApplicationScoped.class, SessionScoped.class ) )
+            .activate( ApplicationScoped.class, SessionScoped.class, RequestScoped.class ) )
                     .build( );
 
     /**
