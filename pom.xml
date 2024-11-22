@@ -40,20 +40,7 @@
             <artifactId>weld-junit5</artifactId>
             <version>4.0.3.Final</version>
         </dependency>
-        <!-- needed for compilation of some weld-using classes -->
-        <dependency>
-	      <groupId>jakarta.inject</groupId>
-	      <artifactId>jakarta.inject-api</artifactId>
-	    </dependency>
-	    <!-- we mock that -->
-    	<dependency>
-		    <groupId>jakarta.enterprise.concurrent</groupId>
-		    <artifactId>jakarta.enterprise.concurrent-api</artifactId>
-		</dependency>
-		<dependency>
-		    <groupId>jakarta.transaction</groupId>
-		    <artifactId>jakarta.transaction-api</artifactId>
-		</dependency>
+       
         <dependency>
             <groupId>io.smallrye.config</groupId>
             <artifactId>smallrye-config</artifactId>
