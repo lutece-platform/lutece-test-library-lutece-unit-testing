@@ -112,6 +112,8 @@ public class MockHttpServletRequest implements HttpServletRequest
     private int serverPort = 80;
     private String remoteAddr = "127.0.0.1";
     private String contextPath = "";
+    private String _strRequestURI = "";
+    private String _strServletPath = "";
 
     public void setContextPath(String contextPath)
     {
@@ -682,7 +684,12 @@ public class MockHttpServletRequest implements HttpServletRequest
         TestLogService.info("MockHttpServletRequest." + new Object()
         {
         }.getClass().getEnclosingMethod().getName());
-        return null;
+        return _strRequestURI;
+    }
+    
+    public void setRequestURI( String strRequestURI )
+    {
+        this._strRequestURI = strRequestURI;
     }
 
     @Override
@@ -700,7 +707,12 @@ public class MockHttpServletRequest implements HttpServletRequest
         TestLogService.info("MockHttpServletRequest." + new Object()
         {
         }.getClass().getEnclosingMethod().getName());
-        return null;
+        return _strServletPath;
+    }
+    
+    public void setServletPath( String strServletPath )
+    {
+        this._strServletPath = strServletPath;
     }
 
     private MockHttpSession session;
