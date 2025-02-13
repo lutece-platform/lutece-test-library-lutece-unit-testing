@@ -37,8 +37,10 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinWorkerThread;
 import java.util.concurrent.atomic.AtomicLong;
 
+import jakarta.annotation.Priority;
 import jakarta.enterprise.concurrent.ManagedThreadFactory;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Alternative;
 
 /**
  * Stands for a container-provided ManagedThreadFactory when under java SE.
@@ -47,6 +49,8 @@ import jakarta.enterprise.context.ApplicationScoped;
  * app bean.
  */
 @ApplicationScoped
+@Alternative
+@Priority( 10 )
 public class MockManagedThreadFactory implements ManagedThreadFactory
 {
     private final ThreadGroup group = Thread.currentThread().getThreadGroup();
