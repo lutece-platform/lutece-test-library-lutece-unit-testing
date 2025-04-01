@@ -40,6 +40,7 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -205,13 +206,11 @@ public class MockHttpServletRequest implements HttpServletRequest
 
     private byte[] content;
     private String contentType, method;
-    private String characterEncoding = "ISO-8859-1";
+    private String characterEncoding = "UTF-8";
 
     public void setContent(byte[] content)
     {
         this.content = content;
-//        this.inputStream = null;
-//        this.reader = null;
     }
 
     public void setContentType(String contentType)
@@ -790,22 +789,45 @@ public class MockHttpServletRequest implements HttpServletRequest
         }.getClass().getEnclosingMethod().getName());
     }
 
+    private Map<String, List<Part>> _parts = new HashMap<String, List<Part>>( );
+    
     @Override
     public Collection<Part> getParts() throws IOException, ServletException
     {
-        TestLogService.info("MockHttpServletRequest." + new Object()
+        List<Part> l = new ArrayList<Part>( );
+        for ( List<Part> listParts : _parts.values( ) )
         {
-        }.getClass().getEnclosingMethod().getName());
-        return null;
+            l.addAll( listParts );
+        }
+        return l;
     }
-
+    
     @Override
     public Part getPart(String name) throws IOException, ServletException
     {
-        TestLogService.info("MockHttpServletRequest." + new Object()
+        try
         {
-        }.getClass().getEnclosingMethod().getName());
-        return null;
+            return _parts.get( name ).get( 0 );
+        }
+        catch( IndexOutOfBoundsException e )
+        {
+            return null;
+        }
+    }
+
+    public void addPart(Part part) 
+    {
+        List<Part> l = null;
+        if ( _parts.containsKey( part.getName( ) ) )
+        {
+            l = _parts.get( part.getName( ) );
+        }
+        else
+        {
+            l = new ArrayList<Part>( );
+        }
+        l.add( part );
+        _parts.put( part.getName( ), l );
     }
 
     @Override
