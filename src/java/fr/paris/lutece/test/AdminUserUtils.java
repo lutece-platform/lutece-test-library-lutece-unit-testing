@@ -68,9 +68,6 @@ public class AdminUserUtils
             Class<?> rightClass = Class.forName( CORE_RIGHT_CLASS );
             Object right = rightClass.getConstructor( ).newInstance( );
 
-            System.err.println( right );
-            System.err.println( right.getClass( ) );
-
             Method setId = rightClass.getMethod( RIGHT_SETTER_ID, String.class );
             setId.invoke( right, strRight );
 
