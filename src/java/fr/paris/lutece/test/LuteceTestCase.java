@@ -41,7 +41,9 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.net.URI;
 import java.net.URL;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ServiceLoader;
@@ -67,6 +69,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.commons.support.AnnotationSupport;
 
 import fr.paris.lutece.TestPackageMarker;
+import fr.paris.lutece.test.mocks.MockHttpServletRequestProducer;
 import jakarta.annotation.Resource;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.RequestScoped;
@@ -97,9 +100,17 @@ public abstract class LuteceTestCase extends org.junit.jupiter.api.Assertions
 
     protected LuteceTestCase( )
     {
-        resourcesDir = getClass( ).getResource( "/" ).toString( ).replaceFirst( "file:", "" ).replaceFirst( "target/.*", "target/lutece/" );
+    	resourcesDir = getClass( ).getResource( "/" ).toString( ).replaceFirst( "file:", "" ).replaceFirst( "target/.*", "target/lutece/" );
+			/*String basePath = getClass().getResource( "/" ).toString( ).replaceFirst( "file:", "" );
+    		String webAppName = System.getProperty("webapp.name");
+    		String rsceDir= basePath.replace("test-classes", webAppName);
+    		if ( Files.notExists( Paths.get( basePath ) ) ) {
+    			rsceDir= basePath.replaceFirst( "test-classes", "lutece" )
+	                .replaceFirst( "classes", "lutece" );
+        	}
+    		resourcesDir=rsceDir;*/
     }
-
+   
     public String getResourcesDir( )
     {
         return resourcesDir;
@@ -209,7 +220,6 @@ public abstract class LuteceTestCase extends org.junit.jupiter.api.Assertions
         {
             TestLogService.info( "configure : could not register TestAlternative stereotype", e );
         }
-
         return weld;
     }
 

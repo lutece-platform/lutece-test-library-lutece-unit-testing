@@ -103,11 +103,24 @@ public class LuteceWeldJunit5Extension extends WeldJunit5Extension
     @Override
     public void afterEach( ExtensionContext context )
     {
+        // In weld-junit5 5.x + JUnit 5.13+, the WeldContainer is registered as AutoCloseable in the
+        // per-test-class Store (namespaced by WeldJunit5Extension + testClass). Since we share a single
+        // static container across ALL test classes for performance, we must remove it from the Store
+        // BEFORE JUnit disposes the Store and auto-closes every AutoCloseable resource it holds.
+        // Without this, the very first test class's afterEach/afterAll would close the shared
+        // container, and every subsequent test class would fail with
+        // "WELD-ENV-002002: Weld SE container was already shut down".
+        ExtensionContextUtils.removeContainerFromStore( context );
     }
 
     @Override
     public void afterAll( ExtensionContext context )
     {
+        // Same rationale as afterEach: remove the shared container from the class-scoped Store so
+        // JUnit's automatic AutoCloseable cleanup (introduced in JUnit 5.13) does not shut it down.
+        // The container remains referenced by the static _container field and is reused by the next
+        // test class in beforeAll().
+        ExtensionContextUtils.removeContainerFromStore( context );
     }
 
 }

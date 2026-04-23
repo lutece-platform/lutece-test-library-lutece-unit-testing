@@ -241,6 +241,7 @@ public class MockHttpServletResponse implements HttpServletResponse
     @Override
     public void sendRedirect(String location) throws IOException
     {
+    	this.setHeader("Location", location);
         TestLogService.info("MockHttpServletResponse." + new Object()
         {
         }.getClass().getEnclosingMethod().getName());
