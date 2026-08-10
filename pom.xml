@@ -36,7 +36,7 @@
         <dependency>
             <groupId>fr.paris.lutece</groupId>
             <artifactId>lutece-core</artifactId>
-            <version>[6.0.0,)</version>
+            <version>[6.0.0,7.9.9)</version>
             <type>lutece-core</type>
             <scope>provided</scope>
         </dependency>
@@ -63,11 +63,31 @@
             <artifactId>javax.el</artifactId>
             <version>3.0.0</version>
         </dependency>
+        <!--
+            Marked optional on purpose: validator 20.7.2 pins httpclient 4.4 (2014)
+            and jetty 9.4.18.v20190429 (2019), and both are genuinely required by
+            the code paths used here (nu.validator.xml.PrudentHttpEntityResolver
+            for entity resolution, org.eclipse.jetty.util.ajax.JSON for the JSON
+            output format of EmbeddedValidator). They can neither be excluded nor
+            upgraded without breaking Utils.validateHtml.
+
+            Left transitive, those versions leak into every consumer project with
+            compile scope: Maven arbitrates the VERSION on the shortest path
+            (library-lutece-unit-testing -> validator -> httpclient), regardless of
+            the test scope this library is declared with. A webapp using
+            httpmime 4.5.13 or jetty-client 9.4.53 then silently runs against
+            httpclient 4.4 / jetty 9.4.18 -> NoSuchMethodError.
+
+            <optional>true</optional> stops that propagation without touching
+            validator's own dependency set. Consumers that call
+            Utils.validateHtml() must declare nu.validator:validator themselves.
+        -->
         <dependency>
             <groupId>nu.validator</groupId>
             <artifactId>validator</artifactId>
             <version>20.7.2</version> <!-- version compatible with java 1.8, see https://github.com/validator/validator/issues/994#issuecomment-652685692 -->
             <scope>compile</scope>
+            <optional>true</optional>
              <exclusions>
                 <exclusion>
                     <groupId>log4j</groupId>
@@ -76,6 +96,38 @@
             </exclusions>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <!--
+                        UtilsTest exercises nu.validator through
+                        Utils.validateHtml. HTML/RelaxNG validation there is deeply
+                        recursive, and the JaCoCo agent instrumentation inflates
+                        every frame enough to overflow the default 512k/1M thread
+                        stack: the tests then fail with a bare
+                        java.lang.StackOverflowError, intermittently (2 to 4 of the
+                        8 validateHtml tests per run, varying between runs on an
+                        identical pom).
+
+                        Verified: with the agent disabled
+                        (-Djacoco.agent.argLine=) the 11 tests pass at the default
+                        stack size, and the same call succeeds outside surefire.
+
+                        lutece-global-pom hardcodes
+                        <argLine>${jacoco.agent.argLine}</argLine>, so -DargLine on
+                        the command line has no effect. The property has to be
+                        re-expanded here to keep the agent, hence coverage, while
+                        raising the stack.
+                    -->
+                    <argLine>${jacoco.agent.argLine} -Xss4m</argLine>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <properties>
         <serverUrl>dev.lutece.paris.fr</serverUrl>
