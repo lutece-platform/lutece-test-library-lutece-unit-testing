@@ -134,7 +134,16 @@
         <jiraBaseUrl>http://dev.lutece.paris.fr/jira</jiraBaseUrl>
         <jiraProjectName>JUNIT</jiraProjectName>
         <jiraComponentId>10232</jiraComponentId>
-        <springVersion>4.3.3.RELEASE</springVersion>
+        <!-- Must track the springVersion of lutece-core, 5.3.39 on this line. This
+             library declares spring-test at compile scope on purpose, since
+             MokeHttpServletRequest extends MockHttpServletRequest, so the version
+             lands on the classpath of every project that depends on it. Behind the
+             core, it used to drag spring-core 4.3.3 there : being the nearest
+             definition it won over the 5.3.39 of every other branch, and Maven left
+             it at compile scope, so it was packaged and shadowed the real one. The
+             webapp then failed to start on NoSuchMethodError
+             ReflectionUtils.accessibleConstructor, called by spring-web 5.3.x. -->
+        <springVersion>5.3.39</springVersion>
     </properties>
 
     <scm>
