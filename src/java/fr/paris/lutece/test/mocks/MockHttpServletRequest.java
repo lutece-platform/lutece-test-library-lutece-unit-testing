@@ -52,7 +52,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import org.apache.http.HttpHeaders;
+import jakarta.ws.rs.core.HttpHeaders;
 
 import fr.paris.lutece.test.TestLogService;
 import jakarta.servlet.AsyncContext;

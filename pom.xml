@@ -3,7 +3,7 @@
     <parent>
         <artifactId>lutece-global-pom</artifactId>
         <groupId>fr.paris.lutece.tools</groupId>
-        <version>8.0.1-SNAPSHOT</version>
+        <version>8.0.2-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -38,40 +38,18 @@
         <dependency>
             <groupId>org.jboss.weld</groupId>
             <artifactId>weld-junit5</artifactId>
-            <version>5.0.3.Final</version>
-        </dependency>
-       
+            <version>4.0.5.Final</version>
+        </dependency>       
         <dependency>
             <groupId>io.smallrye.config</groupId>
             <artifactId>smallrye-config</artifactId>
-            <version>3.7.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
+            <version>3.18.2</version>
         </dependency>
         <dependency>
             <groupId>org.awaitility</groupId>
             <artifactId>awaitility</artifactId>
-            <version>4.0.1</version>
+            <version>4.3.0</version>
             <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>nu.validator</groupId>
-            <artifactId>validator</artifactId>
-            <version>20.7.2</version> <!-- version compatible with java 1.8, see https://github.com/validator/validator/issues/994#issuecomment-652685692 -->
-            <scope>compile</scope>
-             <exclusions>
-                <exclusion>
-                    <groupId>log4j</groupId>
-                    <artifactId>log4j</artifactId>
-                </exclusion>
-                <!-- if included, saxon replaces the internal apache xalan parser and fails with some XSL -->
-                <exclusion>
-                	<groupId>net.sf.saxon</groupId>
-                	<artifactId>Saxon-HE</artifactId>
-                </exclusion>
-             </exclusions>
         </dependency>
         <dependency>
 		    <groupId>fr.paris.lutece.plugins</groupId>
